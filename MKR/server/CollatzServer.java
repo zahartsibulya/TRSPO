@@ -60,14 +60,13 @@ public class CollatzServer {
     }
 
     public static void main(String[] args) {
-        final int port = 9000; // за умовою
+        final int port = 9000;
         final int threadCount = envIntOrDefault("THREAD_COUNT",
                 Math.max(1, Runtime.getRuntime().availableProcessors()));
 
         System.out.println("[SERVER] Starting on port " + port + ", THREAD_COUNT=" + threadCount);
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            // достатньо одного клієнта
             try (Socket client = serverSocket.accept()) {
                 System.out.println("[SERVER] Client connected: " + client.getRemoteSocketAddress());
 
@@ -103,7 +102,7 @@ public class CollatzServer {
                 out.write("\n");
                 out.flush();
 
-                System.out.println("[SERVER] Sent ответ и закрываю соединение.");
+                System.out.println("[SERVER] Sent response and close connection.");
             }
         } catch (IOException e) {
             System.err.println("[SERVER] IO Error: " + e.getMessage());
